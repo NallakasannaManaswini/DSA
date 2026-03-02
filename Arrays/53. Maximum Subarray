@@ -1,0 +1,28 @@
+Step by Step Algorithm: 
+
+Step 1: Initialize curr = 0 and tot = -∞.
+Step 2: Traverse the array from left to right.
+Step 3: For each element, update
+        curr = max(nums[i], curr + nums[i]).
+Step 4: Update maximum sum
+        tot = max(tot, curr).
+Step 5: Continue until the end of the array.
+Step 6: Return tot as the maximum subarray sum.
+
+Time Complexity: O(n)
+Space Complexity: O(1)
+
+
+-----> Code <------
+
+
+class Solution {
+    public int maxSubArray(int[] nums) {
+        int curr=0,tot=Integer.MIN_VALUE;
+        for(int i=0;i<nums.length;i++){
+            curr=Math.max(curr+nums[i],nums[i]);
+            tot=Math.max(curr,tot);
+        }
+        return tot;
+    }
+}
