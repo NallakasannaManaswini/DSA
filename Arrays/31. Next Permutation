@@ -1,0 +1,67 @@
+Step-by-Step Algorithm:
+
+step-1: Traverse from right to left to check if the array is completely in descending order.
+step-2: If the array is fully descending:
+        Reverse the entire array.
+        Return.
+step-3: Otherwise, find the pivot index:
+        Traverse from right.
+        Find the first index i such that
+        nums[i] > nums[i-1]
+        Set pivot = i - 1.
+step-4: Find the element just greater than nums[pivot]:
+        Traverse from right.
+        Find first element greater than pivot value.
+        Swap it with nums[pivot].
+step-5: Reverse the subarray from pivot + 1 to end.
+        This makes the suffix smallest possible.
+step-6: Array is now the next lexicographical permutation.
+
+Time Complexity: O(n)
+Space Complexity: O(1)
+
+
+
+------> Code <------
+
+class Solution {
+    public void nextPermutation(int[] nums) {
+        int n=nums.length;
+        boolean b=true;
+        for(int i=n-1;i>0;i--){
+            if(nums[i-1]<nums[i]){
+                b=false;
+                break;
+            }
+        }
+        if(b){
+            rev(nums,0,n-1);
+            return;
+        }
+        int piv=-1;
+        for(int i=n-1;i>0;i--){
+            if(nums[i-1]<nums[i]){
+                piv=i-1;
+                break;
+            }
+        }
+        for(int i=n-1;i>0;i--){
+            if(nums[i]>nums[piv]){
+                int temp=nums[piv];
+                nums[piv]=nums[i];
+                nums[i]=temp;
+                break;
+            }
+        }
+        rev(nums,piv+1,n-1);
+    }
+    public static void rev(int []arr, int st, int en){
+        while(st<en){
+            int temp=arr[st];
+            arr[st]=arr[en];
+            arr[en]=temp;
+            st++;
+            en--;
+        }
+    }
+}
