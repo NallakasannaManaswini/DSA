@@ -1,0 +1,66 @@
+Step-by-Step Algorithm:
+
+Initialize Dimensions
+Let n be the number of rows in the matrix.
+Let m be the number of columns in the matrix.
+
+Create Marker Arrays
+Create a boolean array r of size n to track rows that must be set to zero.
+Create a boolean array c of size m to track columns that must be set to zero.
+
+First Pass – Identify Zero Positions
+Traverse the matrix using two nested loops.
+For each element at position (i, j):
+If the element is 0:
+Mark r[i] = true
+Mark c[j] = true
+
+Second Pass – Update Matrix
+Traverse the matrix again using two nested loops.
+For each element at position (i, j):
+If r[i] is true or c[j] is true:
+Set matrix[i][j] = 0
+
+End
+The matrix is now modified in-place with required rows and columns set to zero.
+
+Time Complexity
+First traversal of matrix: O(n × m)
+Second traversal of matrix: O(n × m)
+Total Time Complexity:
+O(n×m)
+
+Space Complexity
+Boolean array for rows: O(n)
+Boolean array for columns: O(m)
+Total Space Complexity:
+O(n+m)
+
+
+
+-----> code <-------
+
+class Solution {
+    public void setZeroes(int[][] matrix) {
+        int n=matrix.length;
+        int m=matrix[0].length;
+        boolean r[]=new boolean[n];
+        boolean c[]=new boolean[m];
+        for(int i=0;i<n;i++){
+            for(int j=0;j<m;j++){
+                if(matrix[i][j]==0){
+                    r[i]=true;
+                    c[j]=true;
+                }
+            }
+        }
+        for(int i=0;i<n;i++){
+            for(int j=0;j<m;j++){
+                if(r[i] || c[j]){
+                    matrix[i][j]=0;
+                }
+            }
+        }
+        
+    }
+}
