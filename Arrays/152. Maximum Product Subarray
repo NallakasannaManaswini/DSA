@@ -1,0 +1,38 @@
+Step by Step Algorithm:
+
+Step 1: Initialize three variables:
+        le = 1 (left running product)
+        ri = 1 (right running product)
+        max = -∞ (to store maximum product)
+Step 2: Get the length of the array n.
+Step 3: Traverse the array from index 0 to n - 1.
+Step 4: If le becomes 0, reset it to 1.
+Step 5: If ri becomes 0, reset it to 1.
+Step 6: Multiply:
+        le = le * nums[i] (left to right)
+        ri = ri * nums[n - i - 1] (right to left)
+Step 7: Update maximum value:
+        max = max(max, le, ri)
+Step 8: Continue until all elements are processed.
+Step 9: Return max.
+
+Time Complexity: O(n)
+Space Complexity: O(1)
+
+
+----> Code <----
+
+class Solution {
+    public int maxProduct(int[] nums) {
+        int le=1,ri=1,max=Integer.MIN_VALUE;
+        int n=nums.length;
+        for(int i=0;i<n;i++){
+            if(le==0)le=1;
+            if(ri==0)ri=1;
+            le*=nums[i];
+            ri*=nums[n-i-1];
+            max=Math.max(max,Math.max(le,ri));
+        }
+        return max;
+    }
+}
