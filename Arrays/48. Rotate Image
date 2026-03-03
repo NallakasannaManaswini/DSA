@@ -1,0 +1,43 @@
+Algorithm: Rotate Matrix by 90 Degrees (Clockwise)
+
+Step 1: Get the size of the square matrix.
+Step 2: Traverse the matrix and swap elements across the main diagonal.
+        (This converts rows into columns.)
+Step 3: After completing the diagonal swaps, process each row one by one.
+Step 4: For every row, reverse its elements from left to right.
+Step 5: Continue this process for all rows.
+Step 6: The matrix is now rotated 90 degrees clockwise.
+
+Time Complexity: O(n²)
+Space Complexity: O(1)
+
+
+-----> Code <-----
+
+class Solution {
+    public void rotate(int[][] matrix) {
+        int n=matrix.length;
+        int m=matrix[0].length;
+        for(int i=0;i<n;i++){
+            for(int j=0;j<m;j++){
+                if(i>=j){
+                    int temp=matrix[i][j];
+                    matrix[i][j]=matrix[j][i];
+                    matrix[j][i]=temp;
+                }
+            }
+        }
+        
+        for(int i=0;i<n;i++){
+            int j=0,k=m-1;
+            while(j<k){
+                int temp=matrix[i][j];
+                matrix[i][j]=matrix[i][k];
+                matrix[i][k]=temp;
+                j++;
+                k--;
+            }
+
+        }
+    }
+}
