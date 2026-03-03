@@ -1,0 +1,34 @@
+Algorithm: 
+
+Step 1: Assume the first day’s price as the minimum buying price.
+Step 2: Initialize a variable to store maximum profit as 0.
+Step 3: Traverse the price array starting from the second day.
+Step 4: For each day:
+        If the current price is lower than the stored buying price, update the buying price.
+        Otherwise, calculate the profit by subtracting the buying price from the current price.
+Step 5: If this profit is greater than the stored maximum profit, update the maximum profit.
+Step 6: Continue this process until all days are checked.
+Step 7: Return the maximum profit.
+
+Time Complexity: O(n)
+Space Complexity: O(1)
+
+
+-----> Code <----
+
+class Solution {
+    public int maxProfit(int[] prices) {
+        int buy=prices[0],pro=0;
+        for(int i=1;i<prices.length;i++){
+            if(prices[i]<buy){
+                buy=prices[i];
+            }else{
+                int x=prices[i]-buy;
+                if(pro<x){
+                    pro=x;
+                }
+            }
+        }
+        return pro;
+    }
+}
