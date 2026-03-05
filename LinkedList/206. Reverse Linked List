@@ -1,0 +1,40 @@
+Algorithm:
+
+Step 1: Start with two pointers, one pointing to the head of the list and another initialized to null to represent the previous node.
+Step 2: Traverse the linked list until the current node becomes null.
+Step 3: For each node, store the next node temporarily before changing the link.
+Step 4: Reverse the direction of the current node so that it points to the previous node.
+Step 5: Move the previous pointer to the current node.
+Step 6: Move the current pointer to the next stored node.
+Step 7: Repeat this process for all nodes in the list.
+Step 8: After traversal completes, the previous pointer will point to the new head of the reversed list.
+Step 9: Return the previous pointer as the result.
+
+Time Complexity: O(n)
+Space Complexity: O(1)
+
+
+-----> Code <-----
+
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode reverseList(ListNode head) {
+        ListNode prev=null;
+        while(head!=null){
+            ListNode nxt=head.next;
+            head.next=prev;
+            prev=head;
+            head=nxt;
+        }
+        return prev;
+    }
+}
