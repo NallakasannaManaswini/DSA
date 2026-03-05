@@ -1,0 +1,40 @@
+Algorithm: Merge Two Sorted Arrays
+Step 1: Initialize three pointers:
+        One at the end of the valid elements in the first array.
+        One at the end of the second array.
+        One at the last position of the first array (total capacity).
+Step 2: Compare the elements pointed to in both arrays starting from the end.
+Step 3: Place the larger element at the last available position of the first array.
+Step 4: Move the pointer of the array from which the element was taken and also move the position pointer backward.
+Step 5: Repeat this process until one of the arrays is completely traversed.
+Step 6: If elements still remain in the second array, copy them into the remaining positions of the first array.
+Step 7: The first array will now contain all elements in sorted order.
+
+Time Complexity: O(m + n)
+Space Complexity: O(1)
+
+-----> Code <-----
+
+class Solution {
+    public void merge(int[] nums1, int m, int[] nums2, int n) {
+        int k=m+n-1;
+        m=m-1;
+        n=n-1;
+        while(m>=0 && n>=0 ){
+            if(nums1[m]<nums2[n]){
+                nums1[k]=nums2[n];
+                k--;
+                n--;
+            }else{
+                nums1[k]=nums1[m];
+                m--;
+                k--;
+            }
+        }
+        while(n>=0){
+            nums1[k]=nums2[n];
+            k--;
+            n--;
+        }
+    }
+}
