@@ -1,0 +1,33 @@
+Algorithm:
+
+Step 1: Arrange all intervals in increasing order based on their ending values.
+Step 2: Select the first interval as the previously chosen interval.
+Step 3: Initialize a counter to keep track of the number of overlapping intervals to remove.
+Step 4: Traverse the remaining intervals one by one.
+Step 5: For each interval, compare its starting value with the ending value of the previously selected interval.
+Step 6: If the starting value is less than the previous ending value, an overlap occurs, so increase the removal counter.
+Step 7: If there is no overlap, update the previously selected interval to the current interval.
+Step 8: Continue this process until all intervals are checked.
+Step 9: Return the total number of intervals that must be removed.
+
+Time Complexity: O(n log n)
+Space Complexity: O(1)
+
+
+-----> Code <-----
+
+class Solution {
+    public int eraseOverlapIntervals(int[][] intervals) {
+        Arrays.sort(intervals, Comparator.comparingInt(a->a[1]));
+        int ans=0;
+        int []prev=intervals[0];
+        for(int i=1;i<intervals.length;i++){
+            if(prev[1]>intervals[i][0]){
+                ans++;
+            }else{
+                prev=intervals[i];
+            }
+        }
+        return ans;
+    }
+}
