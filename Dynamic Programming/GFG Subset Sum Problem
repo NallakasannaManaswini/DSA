@@ -1,0 +1,32 @@
+Algorithm:
+
+Step 1: Create a boolean array dp of size sum + 1 to store whether a particular sum is possible.
+Step 2: Initialize dp[0] as true because a sum of 0 is always possible with no elements.
+Step 3: Traverse all elements of the given array one by one.
+Step 4: For each element, traverse the dp array from sum down to the value of the current element.
+Step 5: For every position, check whether the current sum can be formed either by excluding the element or including it.
+Step 6: Update the dp array accordingly to mark that sum as possible.
+Step 7: Continue this process for all elements in the array.
+Step 8: After processing all elements, check the value stored at dp[sum].
+Step 9: If dp[sum] is true, it means a subset exists with the required sum.
+Step 10: Return the value stored at dp[sum].
+
+Time Complexity: O(n × sum)
+Space Complexity: O(sum)
+
+
+-----> Code <-----
+
+class Solution {
+    static Boolean isSubsetSum(int arr[], int sum) {
+        // code here
+        boolean[] dp=new boolean[sum+1];
+        dp[0]=true;
+        for(int i=0;i<arr.length;i++){
+            for(int j=sum;j>=arr[i];j--){
+                dp[j]=(dp[j] || dp[j-arr[i]]);
+            }
+        }
+        return dp[sum];
+    }
+}
