@@ -1,0 +1,38 @@
+Algorithm:
+
+Step 1: Sort the given array so that duplicate elements come together.
+Step 2: Create a list to store all unique subsets.
+Step 3: Start a recursive process with an empty subset and starting index 0.
+Step 4: At each recursive call, check if the current subset is already present in the result list.
+Step 5: If it is not present, add the current subset to the result list.
+Step 6: Traverse the array from the current starting index to the end.
+Step 7: Include the current element in the subset.
+Step 8: Recursively continue the process with the next index to explore further subsets.
+Step 9: After returning from recursion, remove the last element to backtrack and try other combinations.
+Step 10: Continue this process until all elements are processed and all unique subsets are generated.
+
+Time Complexity: O(2ⁿ × n)
+Space Complexity: O(n) 
+
+
+-----> Code <-----
+
+class Solution {
+    public List<List<Integer>> subsetsWithDup(int[] nums) {
+        List<List<Integer>> ans=new ArrayList<>();
+        List<Integer> al=new ArrayList<>();
+        Arrays.sort(nums);
+        func(nums,ans,al, 0);
+        return ans;
+    }
+    public static void func(int[] nums,List<List<Integer>> ans,List<Integer> al,int st){
+        if(al.size()<=nums.length && !ans.contains(al)){
+            ans.add(new ArrayList<>(al));
+        }
+        for(int i=st;i<nums.length;i++){
+            al.add(nums[i]);
+            func(nums,ans,al,i+1);
+            al.remove(al.size()-1);
+        }
+    }
+}
