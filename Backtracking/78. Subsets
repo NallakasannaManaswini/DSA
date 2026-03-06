@@ -1,0 +1,36 @@
+Algorithm: 
+
+Step 1: Create a list to store all subsets of the given array.
+Step 2: Start a recursive process with an empty subset and starting index 0.
+Step 3: At each recursive call, add the current subset to the result list.
+Step 4: Traverse the array from the current starting index to the end.
+Step 5: For each element, include it in the current subset.
+Step 6: Recursively continue the process with the next index to explore further subsets.
+Step 7: After returning from recursion, remove the last added element to backtrack and explore other possibilities.
+Step 8: Repeat this process until all possible subsets are generated.
+Step 9: After the recursion completes, return the list containing all subsets.
+
+Time Complexity: O(n × 2ⁿ)
+Space Complexity: O(n) 
+
+
+-----> Code <-----
+
+class Solution {
+    public List<List<Integer>> subsets(int[] nums) {
+        List<List<Integer>> ans=new ArrayList<>();
+        func(nums,ans,new ArrayList<>(),0);
+        return ans;
+
+    }
+    public static void func(int []nums,List<List<Integer>> ans, List<Integer> al,int st){
+        if(al.size()<=nums.length){
+            ans.add(new ArrayList<>(al));
+        }
+        for(int i=st;i<nums.length;i++){
+            al.add(nums[i]);
+            func(nums,ans,al,i+1);
+            al.remove(al.size()-1);
+        }
+    }
+}
