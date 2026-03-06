@@ -1,0 +1,39 @@
+Algorithm:
+
+Step 1: Create a list to store all permutations.
+Step 2: Create an empty list to store the current permutation.
+Step 3: Start a recursive process to build permutations.
+Step 4: If the size of the current permutation becomes equal to the array length, add it to the result list.
+Step 5: Traverse through all elements of the array.
+Step 6: If the current element is already present in the permutation, skip it to avoid repetition.
+Step 7: Otherwise, add the element to the current permutation.
+Step 8: Recursively continue the process to fill the next position in the permutation.
+Step 9: After returning from recursion, remove the last element to backtrack and try other possibilities.
+Step 10: Continue this process until all possible permutations are generated.
+
+Time Complexity: O(n! × n)
+Space Complexity: O(n)
+
+
+-----> Code <-----
+
+class Solution {
+    public List<List<Integer>> permute(int[] nums) {
+        List<List<Integer>> ans=new ArrayList<>();
+        List<Integer> al=new ArrayList<>();
+        func(nums,ans,al,0);
+        return ans;
+    }
+    public static void func(int[] nums,List<List<Integer>> ans,List<Integer> al,int st){
+        if(al.size()==nums.length){
+            ans.add(new ArrayList<>(al));
+            return;
+        }
+        for(int i=0;i<nums.length;i++){
+            if(al.contains(nums[i]))continue;
+            al.add(nums[i]);
+            func(nums,ans,al,i+1);
+            al.remove(al.size()-1);
+        }
+    }
+}
