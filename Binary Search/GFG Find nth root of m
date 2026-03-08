@@ -1,0 +1,44 @@
+Algorithm:
+
+Step 1: Initialize low = 0 and high = m.
+Step 2: Perform Binary Search while low <= high.
+Step 3: Find mid = (low + high) / 2.
+Step 4: Initialize num = 1 (long type) to store mid^n.
+Step 5: Run a loop n times and multiply num = num * mid to compute mid^n.
+Step 6: If num == m, return mid because mid is the nth root.
+Step 7: If num > m, move left by setting high = mid - 1.
+Step 8: If num < m, move right by setting low = mid + 1.
+Step 9: Repeat the process until the search space ends.
+Step 10: If no integer nth root is found, return -1.
+
+Time Complexity: O(n × log m)
+Space Complexity: O(1)
+
+
+-----> Code <-----
+
+class Solution {
+    public int nthRoot(int n, int m) {
+        // code here
+        int low=0;
+        int high=m;
+        while(low<=high){
+            int mid=(low+high)/2;
+            long num = 1;
+            for(int i=0;i<n;i++){
+                num = num * mid;
+            }
+            if(num==m){
+                return mid;
+            }
+            else if(num>m){
+                high=mid-1;
+            }
+            else{
+                low=mid+1;
+            }
+        }
+        return -1;
+        
+    }
+}
