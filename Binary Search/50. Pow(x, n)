@@ -1,0 +1,40 @@
+Algorithm:
+
+Step 1: Store the exponent N in a long variable n to handle large negative values.
+Step 2: If n is negative, convert the base to its reciprocal (1/x) and make n positive.
+Step 3: Initialize ans = 1 to store the final result.
+Step 4: Initialize curr = x to represent the current power of the base.
+Step 5: Start a loop while n > 0.
+Step 6: If n is even, square the current value (curr = curr * curr).
+Step 7: If n is odd, multiply ans with curr, then square curr.
+Step 8: Divide n by 2 in every iteration to reduce the exponent.
+Step 9: Continue the process until n becomes 0.
+Step 10: Return ans as the final power value.
+
+Time Complexity: O(log n)
+Space Complexity: O(1)
+
+
+-----> Code <-----
+
+class Solution {
+    public double myPow(double x, int N) {
+        long n=N;
+        if(n<0){
+            x=1/x;
+            n=-(n);
+        }
+        double ans=1;
+        double curr=x;
+        while(n>0){
+            if(n%2==0){
+                curr*=curr;
+            }else{
+                ans*=curr;
+                curr*=curr;
+            }
+            n=n/2;
+        }
+        return ans;
+    }
+}
