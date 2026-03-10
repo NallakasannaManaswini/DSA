@@ -1,0 +1,36 @@
+Algorithm:
+
+Step 1: Initialize two variables low = 0 and high = x.
+Step 2: Start a Binary Search loop while low <= high.
+Step 3: Find the middle value mid = (low + high) / 2.
+Step 4: Calculate the square of mid using a long variable to avoid overflow.
+Step 5: If the square is equal to x, return mid as the square root.
+Step 6: If the square is greater than x, move the search to the left by updating high = mid - 1.
+Step 7: If the square is smaller than x, move the search to the right by updating low = mid + 1.
+Step 8: Continue this process until the search space becomes invalid (low > high).
+Step 9: Return high, because it stores the largest number whose square is less than or equal to x.
+
+Time Complexity: O(log x)
+Space Complexity: O(1)
+
+
+-----> Code <-----
+
+class Solution {
+    public int mySqrt(int x) {
+        int low=0;
+        int high=x;
+        while(low<=high){
+            int mid=(high+low)/2;
+            long sq=(long)mid*mid;
+            if(sq==x){
+                return mid;
+            }else if(sq>x){
+                high=mid-1;
+            }else{
+                low=mid+1;
+            }
+        }
+        return high;
+    }
+}
