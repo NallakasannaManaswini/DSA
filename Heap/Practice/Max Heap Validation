@@ -1,0 +1,42 @@
+Algorithm:
+
+Step 1: Get the size of the given array.
+Step 2: Traverse all parent nodes of the heap (from index 0 to (n/2) - 1).
+Step 3: For each parent node, check its left child position.
+Step 4: If the left child exists and its value is greater than the parent, return false because it violates the Max Heap property.
+Step 5: Check the right child position of the parent.
+Step 6: If the right child exists and its value is greater than the parent, return false.
+Step 7: Continue this process for all parent nodes in the array.
+Step 8: If no violation is found after checking all nodes, return true.
+
+Time Complexity: O(n)
+Space Complexity: O(1)
+
+
+-----> Code <-----
+
+
+import java.util.*;
+public class Solution {
+    public static boolean maxHeapValidation(int[] arr) {
+        int n = arr.length;
+        for(int i = 0; i < (n/2)-1; i++){
+            if(2*i + 1 < n && arr[2*i+1] > arr[i]){
+                return false;
+            }
+            if(2*i + 2 < n && arr[2*i+2] > arr[i]){
+                return false;
+            }
+        }
+        return true;
+    }
+    public static void main(String[] args) {
+        int[] arr = {50, 30, 40, 10, 5, 20, 35, 2, 1};
+        boolean result = maxHeapValidation(arr);
+        if(result){
+            System.out.println("Valid Max Heap");
+        }else{
+            System.out.println("Not a Max Heap");
+        }
+    }
+}
