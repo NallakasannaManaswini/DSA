@@ -1,0 +1,101 @@
+Algorithm for ChangeKey:
+
+Step 1: Check whether the given index is valid in the heap.
+Step 2: If the index is outside the heap range, stop the process.
+Step 3: Store the old value present at the given index.
+Step 4: Replace the value at that index with the new value.
+Step 5: Compare the old value with the new value.
+Step 6: If the new value is smaller than the old value, apply the heapify process from that index to restore the Max Heap property downward.
+Step 7: If the new value is greater than the old value, move the element upward in the heap.
+Step 8: Compare the current element with its parent node.
+Step 9: If the current element is greater than the parent, swap them.
+Step 10: Continue moving the element upward until the Max Heap property is satisfied or the root is reached.
+
+Time Complexity: O(log n)
+Space Complexity: O(1)
+
+
+
+-----> code <-----
+
+
+import java.util.*;
+class heap{
+    public static void main(String[] args) {
+        Scanner sc=new Scanner(System.in);
+        int arr[]={30, 50, 10, 40, 20, 5, 1, 35, 2};
+        ArrayList<Integer> al=new ArrayList<>();
+        al.add(arr[0]);
+        for(int i=1;i<arr.length;i++){
+            al.add(arr[i]);
+            int curr=al.size()-1;
+            while(curr>0){
+                int parent=(curr-1)/2;
+                if(al.get(curr)>al.get(parent)){
+                    int temp=al.get(curr);
+                    al.set(curr,al.get(parent));
+                    al.set(parent,temp);
+
+                    curr=parent;
+                }
+                else break;
+            }
+        }
+        System.err.println(al);
+        System.out.println(ExtractMax(al));
+        changeKey(al, 2, 100);
+        System.out.println(al);
+    }
+    public static int ExtractMax(ArrayList<Integer> al){
+        if(al.size()<1)return -1;
+        int max=al.get(0);
+        int root=al.get(al.size()-1);
+        al.set(0,root);
+        al.remove(al.size()-1);
+        int n=al.size();
+        for(int i=(n/2)-1;i>=0;i--){
+            heapify(i,al);
+        }
+        return max;
+    }
+    public static void heapify(int i,ArrayList<Integer> al){
+        int left=2*i+1;
+        int right=2*i+2;
+        int max=i;
+        if(left<al.size() && al.get(max)<al.get(left)){
+            max=left;
+        }
+        if(right<al.size() && al.get(max)<al.get(right)){
+            max=right;
+        }
+        if(max!=i){
+            int temp=al.get(i);
+            al.set(i,al.get(max));
+            al.set(max,temp);
+            heapify(max, al);
+        }
+    }
+    public static void changeKey(ArrayList<Integer> al, int inx, int val) {
+        if(inx<0 || inx>al.size()-1 ) return;
+        
+        int old=al.get(inx);
+        al.set(inx,val);
+        if(old > val)
+        heapify(inx,al);
+        else{
+            int curr=inx;
+            while(curr>0){
+                int parent=(curr/2)-1;
+                if(al.get(curr)>al.get(parent)){
+                    int temp=al.get(curr);
+                    al.set(curr,al.get(parent));
+                    al.set(parent,temp);
+                    curr=parent;
+                }else {
+                    break;
+                }
+            }
+
+        }
+    }
+}
