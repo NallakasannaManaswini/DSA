@@ -1,0 +1,86 @@
+Algorithm for ExtractMax
+
+Step 1: Check if the heap is empty; if it is empty return -1.
+Step 2: Store the value at the root because it is the maximum element of the Max Heap.
+Step 3: Take the last element of the heap and place it at the root position.
+Step 4: Remove the last element from the heap to reduce the heap size.
+Step 5: Starting from the last non-leaf node, apply the heapify process to restore the Max Heap property.
+Step 6: Continue heapifying until the heap structure becomes valid again.
+Step 7: Return the stored maximum element.
+
+Time Complexity: O(n)
+Space Complexity: O(1)
+
+Algorithm for Heapify
+
+Step 1: Consider a node position in the heap.
+Step 2: Find the positions of its left and right children.
+Step 3: Compare the value of the current node with its children.
+Step 4: Identify the position that contains the largest value among them.
+Step 5: If one of the children is larger than the current node, swap their positions.
+Step 6: After swapping, apply the heapify process again on the affected child position.
+Step 7: Repeat this process until the Max Heap property is satisfied.
+
+Time Complexity: O(log n)
+Space Complexity: O(1)
+
+
+
+-----> Code <-----
+
+import java.util.*;
+class heap{
+    public static void main(String[] args) {
+        Scanner sc=new Scanner(System.in);
+        int arr[]={30, 50, 10, 40, 20, 5, 1, 35, 2};
+        ArrayList<Integer> al=new ArrayList<>();
+        al.add(arr[0]);
+        for(int i=1;i<arr.length;i++){
+            al.add(arr[i]);
+            int curr=al.size()-1;
+            while(curr>0){
+                int parent=(curr-1)/2;
+                if(al.get(curr)>al.get(parent)){
+                    int temp=al.get(curr);
+                    al.set(curr,al.get(parent));
+                    al.set(parent,temp);
+
+                    curr=parent;
+                }
+                else break;
+            }
+        }
+        System.err.println(al);
+        System.out.println(ExtractMax(al));
+    }
+    public static int ExtractMax(ArrayList<Integer> al){
+        if(al.size()<1)return -1;
+        int max=al.get(0);
+        int root=al.get(al.size()-1);
+        al.set(0,root);
+        al.remove(al.size()-1);
+        int n=al.size();
+        for(int i=(n/2)-1;i>=0;i--){
+            heapify(i,al);
+        }
+
+        return max;
+    }
+    public static void heapify(int i,ArrayList<Integer> al){
+        int left=2*i+1;
+        int right=2*i+2;
+        int max=i;
+        if(left<al.size() && al.get(max)<al.get(left)){
+            max=left;
+        }
+        if(right<al.size() && al.get(max)<al.get(right)){
+            max=right;
+        }
+        if(max!=i){
+            int temp=al.get(i);
+            al.set(i,al.get(max));
+            al.set(max,temp);
+            heapify(max, al);
+        }
+    }
+}
