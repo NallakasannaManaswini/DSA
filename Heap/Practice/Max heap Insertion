@@ -1,0 +1,46 @@
+Algorithm:
+
+Step 1: Create an empty list to store heap elements.
+Step 2: Insert the first element of the array into the list as the root of the heap.
+Step 3: Traverse the remaining elements of the array one by one.
+Step 4: Insert the current element at the end of the heap.
+Step 5: Treat the inserted element as the current node.
+Step 6: Find the parent position of the current node.
+Step 7: Compare the current node value with its parent value.
+Step 8: If the current node is greater than the parent, swap their positions.
+Step 9: Move the current node to the parent position and repeat the comparison.
+Step 10: Continue this process until the Max Heap property is satisfied or the root is reached.
+Step 11: Repeat the same procedure for all elements of the array.
+Step 12: After all insertions are completed, the list represents a valid Max Heap.
+
+Time Complexity: O(n log n)
+Space Complexity: O(n)
+
+
+-----> Code <-----
+
+import java.util.*;
+class heap{
+    public static void main(String[] args) {
+        Scanner sc=new Scanner(System.in);
+        int arr[]={30, 50, 10, 40, 20, 5, 1, 35, 2};
+        ArrayList<Integer> al=new ArrayList<>();
+        al.add(arr[0]);
+        for(int i=1;i<arr.length;i++){
+            al.add(arr[i]);
+            int curr=al.size()-1;
+            while(curr>0){
+                int parent=(curr-1)/2;
+                if(al.get(curr)>al.get(parent)){
+                    int temp=al.get(curr);
+                    al.set(curr,al.get(parent));
+                    al.set(parent,temp);
+
+                    curr=parent;
+                }
+                else break;
+            }
+        }
+        System.err.println(al);
+    }
+}
