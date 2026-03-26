@@ -1,0 +1,43 @@
+Algorithm: Next Smaller Element
+
+Step 1: Create an empty stack to help find the next smaller elements.
+Step 2: Create a list to store the result.
+Step 3: Traverse the array from right to left.
+Step 4: For each element, check if the stack is empty.
+Step 5: If the stack is empty, add -1 to the result (no smaller element exists).
+Step 6: If the stack is not empty, remove elements from the stack while they are greater than or equal to the current element.
+Step 7: After removing, check the stack again.
+Step 8: If the stack becomes empty, add -1 to the result; otherwise, add the top element of the stack as the next smaller element.
+Step 9: Push the current element into the stack.
+Step 10: Repeat this process for all elements.
+Step 11: Reverse the result list to maintain the correct order.
+Step 12: Return the final list.
+
+Time Complexity: O(n)
+Space Complexity: O(n)
+
+
+
+-----> Code <-----
+
+class Solution {
+    static ArrayList<Integer> nextSmallerEle(int[] arr) {
+        ArrayList<Integer> al=new ArrayList<>();
+        Stack<Integer> st=new Stack<>();
+        int n=arr.length;
+        for(int i=n-1;i>=0;i--){
+            if(st.isEmpty()){
+                al.add(-1);
+            }else{
+                while(!st.isEmpty() && st.peek()>=arr[i]){
+                    st.pop();
+                }
+                if(st.isEmpty())al.add(-1);
+                else al.add(st.peek());
+            }
+            st.push(arr[i]);
+        }
+        Collections.reverse(al);
+        return al;
+    }
+}
