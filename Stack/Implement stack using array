@@ -1,0 +1,82 @@
+Algorithm: Stack Operations Using Array
+
+-> Initialization:
+
+Step 1: Create an array of given size to store stack elements.
+Step 2: Initialize a variable to represent the top position as -1 (indicating empty stack).
+
+-> isEmpty Operation:
+
+Step 1: Check if the top position is -1.
+Step 2: If yes, the stack is empty.
+Step 3: Otherwise, the stack is not empty.
+
+-> isFull Operation
+
+Step 1: Check if the top position is equal to the last index of the array.
+Step 2: If yes, the stack is full.
+Step 3: Otherwise, the stack is not full.
+
+-> push Operation
+
+Step 1: Check if the stack is full.
+Step 2: If full, do not insert the element.
+Step 3: Otherwise, move the top position one step forward.
+Step 4: Insert the new element at the top position.
+
+-> pop Operation
+
+Step 1: Check if the stack is empty.
+Step 2: If empty, do nothing.
+Step 3: Otherwise, move the top position one step backward to remove the top element.
+
+-> peek Operation
+
+Step 1: Check if the stack is empty.
+Step 2: If empty, return an invalid value.
+Step 3: Otherwise, return the element present at the top position.
+
+
+Time Complexity: O(1) for all operations
+Space Complexity: O(n)
+
+
+
+-----> Code <-----
+
+
+class myStack {
+    int arr[];
+    int top=-1;
+    public myStack(int n) {
+        arr=new int[n];
+    }
+
+    public boolean isEmpty() {
+        if(top==-1)return true;
+        return false;
+    }
+
+    public boolean isFull() {
+        if(top==arr.length-1)return true;
+        return false;
+    }
+
+    public void push(int x) {
+        if(top==arr.length-1)return;
+        
+        top++;
+        arr[top]=x;
+    }
+
+    public void pop() {
+        if(top==-1)return ;
+  
+        top--;
+    }
+
+    public int peek() {
+        if(top==-1)return -1;
+        return arr[top];
+    }
+}
